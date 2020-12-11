@@ -1,0 +1,41 @@
+%table.table.table-striped
+  %tbody
+    - pokemons.each do |pokemon_name|
+      - pokemon = Pokemon.new(name: pokemon_name)
+      %tr
+        %td.image
+          = image_tag pokemon.image_url, width: "30px"
+        %td
+          = pokemon.name.titleize
+          - pokemon.types.each do |type|
+            %span.badge
+              = type.type.name
+
+
+        %td{width: 30}
+          = link_to "Add", "#", class: 'add-pokemon-button', data: {name: pokemon.name}
+
+.pull-right
+  = link_to "Next", pokemons_path(page: page + 1, type: params[:type]), remote: true, class: 'btn btn-success'
+
+:coffee
+  $(document).on "click", ".add-pokemon-button", (e) ->
+    e.preventDefault()
+    $.ajax
+      type: 'POST'
+      url: '/pokemons'
+      data:
+        name: $(this).data('name')
+
+:sass
+  table.table
+    tbody
+      tr
+        height: 41px
+        td
+          padding: 0
+          vertical-align: middle
+          &.image
+            width: 40px
+            img
+              width: 40px

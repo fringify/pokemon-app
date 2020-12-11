@@ -1,0 +1,11 @@
+== README
+
+Ruby Version: 2.3.7.p456
+Rails Version: 4.1.0
+
+About the App
+
+- You can add upto 6 pokemon to your lineup
+- You can customize's nickname of your pokemon
+- Listing has a pagination
+- Pokemon List can be filtered by types

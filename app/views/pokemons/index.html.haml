@@ -1,0 +1,78 @@
+.container
+  .row-fluid
+    .col-md-7.left-container
+      .row
+        .col-md-12
+          .inner.line-up-container
+            .header
+              %h4
+                Pokemon Lineup
+                %span.sub-header
+                  maximum 6 only
+
+            .content
+              = render 'lineup'
+      .row
+        .col-md-12
+          .inner.data-container
+            .header
+              %h4
+                Pokemon Data
+            .content
+
+    .col-md-5.right-container
+      .inner
+        .header
+          %h4
+            Pokedex Area
+          
+        %form.form-inline
+          .form-group
+            %label Types
+            = select_tag :filter, options_for_select(@pokemon_types), prompt: "All", class: "form-control"
+        .pokemon-list
+          = render partial: "list", locals: {pokemons: @pokemons, page: @page}
+
+
+
+:coffee
+  $(document).on "change", "#filter", (e) ->
+    $.ajax
+      type: 'GET'
+      url: '/pokemons/load_by_types'
+      data:
+        type: $("#filter").val()
+
+:sass
+  .container
+    margin-top: 20px 
+
+  .left-container
+    padding-left: 0px
+    padding-right: 5px
+
+  .header
+    border-bottom: 1px solid #ccc
+    margin-bottom: 10px
+    .sub-header
+      font-size: 14px
+
+  .right-container
+    padding-right: 0px
+    padding-left: 5px
+    .inner
+      min-height: 812px
+
+  .inner
+    border: 1px solid black
+    padding: 10px 20px
+
+  .line-up-container
+    margin-bottom: 10px
+    min-height: 462px
+
+  .data-container
+    min-height: 340px
+
+  form
+    margin-bottom: 20px

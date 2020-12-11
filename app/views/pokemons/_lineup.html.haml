@@ -1,0 +1,15 @@
+.row
+  - Pokemon.all.each do |pokemon|
+    .col-sm-4.lineup-box{data: {toggle: "tooltip"}, title: pokemon.name.titleize}
+      = link_to edit_pokemon_path(pokemon), class: "plain-link", remote: true do
+        = image_tag pokemon.image_url
+
+:sass
+  .lineup-box
+    margin-bottom: 10px
+    img
+      max-width: 100%
+
+  .plain-link
+    &:hover
+      background-color: transparent

@@ -1,0 +1,9 @@
+= form_for @pokemon, remote: true do |f|
+  .form-group
+    %label
+      = "#{@pokemon.name.titleize}'s Nickname"
+    = f.text_field :nickname
+
+
+  .aright
+    = f.submit "Save"
